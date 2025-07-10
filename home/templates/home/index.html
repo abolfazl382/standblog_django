@@ -66,13 +66,20 @@ https://templatemo.com/tm-551-stand-blog
               <li class="nav-item">
                 <a class="nav-link" href="post-details.html">Post Details</a>
               </li>
-              <li class="nav-item">
+
                 {% if request.user.is_authenticated %}
+                    <li class="nav-item">
                     <a class="nav-link" href="">{{ request.user.first_name }}</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/logout">logout</a>
+                    </li>
                 {% else %}
+                    <li class="nav-item">
                     <a class="nav-link" href="/login">login</a>
+                    </li>
                 {% endif %}
-              </li>
+
             </ul>
           </div>
         </div>

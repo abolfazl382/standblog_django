@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 def login_user(request):
 
@@ -15,3 +15,7 @@ def login_user(request):
             return redirect('/')
     else:
         return render(request, 'account/login.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
