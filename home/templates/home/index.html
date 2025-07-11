@@ -72,14 +72,14 @@ https://templatemo.com/tm-551-stand-blog
                     <a class="nav-link" href="">{{ request.user.username }}</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/logout">logout</a>
+                    <a class="nav-link" href="{% url 'account:logout' %}">logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                    <a class="nav-link" href="/register">register</a>
+                    <a class="nav-link" href="{% url 'account:register' %}">register</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/login">login</a>
+                    <a class="nav-link" href="{% url 'account:login' %}">login</a>
                     </li>
                 {% endif %}
 
