@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 class Article(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     body = models.TextField()
     image = models.ImageField(upload_to='images/articles')
