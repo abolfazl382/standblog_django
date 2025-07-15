@@ -46,3 +46,5 @@ def register_user(request):
         return redirect('/')
 
     return render(request, 'account/register.html')
+
+
