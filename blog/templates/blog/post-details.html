@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
+    <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
 
-    <title>Stand CSS Blog by TemplateMo</title>
+    <title>Stand Blog - Post Details</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -52,7 +51,7 @@ https://templatemo.com/tm-551-stand-blog
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="index.html">Home
                   <span class="sr-only">(current)</span>
                 </a>
@@ -63,33 +62,12 @@ https://templatemo.com/tm-551-stand-blog
               <li class="nav-item">
                 <a class="nav-link" href="blog.html">Blog Entries</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="post-details.html">Post Details</a>
               </li>
-
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account:logout' %}">logout</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="">{{ request.user.username }}</a>
-                    </li>
-                    <li>
-                       {% if request.user.profile.image %}
-                           <img src="{{ request.user.profile.image.url }}" alt="profile image" width="40" height="40" style="border-radius: 50%">
-                       {% else %}
-                           <img src="{% static 'images/default.png' %}" alt="profile image" width="40" height="40" style="border-radius: 50%">
-                       {% endif %}
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account:register' %}">register</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account:login' %}">login</a>
-                    </li>
-                {% endif %}
-
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -98,34 +76,21 @@ https://templatemo.com/tm-551-stand-blog
 
     <!-- Page Content -->
     <!-- Banner Starts Here -->
-    <div class="main-banner header-text">
-      <div class="container-fluid">
-        <div class="owl-banner owl-carousel">
-
-          {% for article in articles %}
-
-              <div class="item">
-            <img src="{{ article.image.url }}" alt="{{ article.title }}">
-            <div class="item-content">
-              <div class="main-content">
-                <div class="meta-category">
-                  <span>{{ article.categories.first.title  }}</span>
-                </div>
-                <a href="#"><h4>{{ article.title }}</h4></a>
-                <ul class="post-info">
-                  <li><a href="#">{{ article.author.username }}</a></li>
-                  <li><a href="#">{{ article.created }}</a></li>
-                  <li><a href="#">12 Comments</a></li>
-                </ul>
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>Post Details</h4>
+                <h2>Single blog post</h2>
               </div>
             </div>
           </div>
-
-            {% endfor %}
-
         </div>
-      </div>
+      </section>
     </div>
+    
     <!-- Banner Ends Here -->
 
     <section class="call-to-action">
@@ -151,36 +116,34 @@ https://templatemo.com/tm-551-stand-blog
     </section>
 
 
-    <section class="blog-posts">
+    <section class="blog-posts grid-system">
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
             <div class="all-blog-posts">
               <div class="row">
-
-              {% for article in articles %}
-
-                    <div class="col-lg-12">
+                <div class="col-lg-12">
                   <div class="blog-post">
                     <div class="blog-thumb">
-                      <img src="{{ article.image.url }}" alt="{{ article.title }}">
+                      <img src="{{ article.image.url }}" alt="">
                     </div>
                     <div class="down-content">
-                      <span>Lifestyle</span>
-                      <a href="{% url 'blog:article' article.id %}"><h4>{{ article.title }}</h4></a>
+                      <span>{{ article.categories.first }}</span>
+                      <a href="post-details.html"><h4>{{ article.title }}</h4></a>
                       <ul class="post-info">
                         <li><a href="#">{{ article.author.username }}</a></li>
                         <li><a href="#">{{ article.created }}</a></li>
-                        <li><a href="#">12 Comments</a></li>
+                        <li><a href="#">10 Comments</a></li>
                       </ul>
-                        <p>{{ article.body }}</p>
+                      <p>{{ article.body }}</p>
                       <div class="post-options">
                         <div class="row">
                           <div class="col-6">
                             <ul class="post-tags">
                               <li><i class="fa fa-tags"></i></li>
-                              <li><a href="#">Beauty</a>,</li>
-                              <li><a href="#">Nature</a></li>
+                             {% for category in article.categories.all %}
+                                 <li><a href="#">{{ category.title }}</a>,</li>
+                             {% endfor %}
                             </ul>
                           </div>
                           <div class="col-6">
@@ -195,15 +158,91 @@ https://templatemo.com/tm-551-stand-blog
                     </div>
                   </div>
                 </div>
-
-                  {% endfor %}
-
                 <div class="col-lg-12">
-                  <div class="main-button">
-                    <a href="blog.html">View All Posts</a>
+                  <div class="sidebar-item comments">
+                    <div class="sidebar-heading">
+                      <h2>4 comments</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        <li>
+                          <div class="author-thumb">
+                            <img src="{% static 'images/comment-author-01.jpg' %}" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>Charles Kate<span>May 16, 2020</span></h4>
+                            <p>Fusce ornare mollis eros. Duis et diam vitae justo fringilla condimentum eu quis leo. Vestibulum id turpis porttitor sapien facilisis scelerisque. Curabitur a nisl eu lacus convallis eleifend posuere id tellus.</p>
+                          </div>
+                        </li>
+                        <li class="replied">
+                          <div class="author-thumb">
+                            <img src="{% static 'images/comment-author-02.jpg' %}" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>Thirteen Man<span>May 20, 2020</span></h4>
+                            <p>In porta urna sed venenatis sollicitudin. Praesent urna sem, pulvinar vel mattis eget.</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="author-thumb">
+                            <img src="{% static 'images/comment-author-03.jpg' %}" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>Belisimo Mama<span>May 16, 2020</span></h4>
+                            <p>Nullam nec pharetra nibh. Cras tortor nulla, faucibus id tincidunt in, ultrices eget ligula. Sed vitae suscipit ligula. Vestibulum id turpis volutpat, lobortis turpis ac, molestie nibh.</p>
+                          </div>
+                        </li>
+                        <li class="replied">
+                          <div class="author-thumb">
+                            <img src="{% static 'images/comment-author-02.jpg' %}" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>Thirteen Man<span>May 22, 2020</span></h4>
+                            <p>Mauris sit amet justo vulputate, cursus massa congue, vestibulum odio. Aenean elit nunc, gravida in erat sit amet, feugiat viverra leo.</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-
+                <div class="col-lg-12">
+                  <div class="sidebar-item submit-comment">
+                    <div class="sidebar-heading">
+                      <h2>Your comment</h2>
+                    </div>
+                    <div class="content">
+                      <form id="comment" action="#" method="post">
+                        <div class="row">
+                          <div class="col-md-6 col-sm-12">
+                            <fieldset>
+                              <input name="name" type="text" id="name" placeholder="Your name" required="">
+                            </fieldset>
+                          </div>
+                          <div class="col-md-6 col-sm-12">
+                            <fieldset>
+                              <input name="email" type="text" id="email" placeholder="Your email" required="">
+                            </fieldset>
+                          </div>
+                          <div class="col-md-12 col-sm-12">
+                            <fieldset>
+                              <input name="subject" type="text" id="subject" placeholder="Subject">
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-12">
+                            <fieldset>
+                              <textarea name="message" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-12">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="main-button">Submit</button>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -306,9 +345,11 @@ https://templatemo.com/tm-551-stand-blog
       </div>
     </footer>
 
+
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
 
     <!-- Additional Scripts -->
     <script src="{% static 'js/custom.js' %}"></script>
@@ -316,6 +357,7 @@ https://templatemo.com/tm-551-stand-blog
     <script src="{% static 'js/slick.js' %}"></script>
     <script src="{% static 'js/isotope.js' %}"></script>
     <script src="{% static 'js/accordions.js' %}"></script>
+
 
     <script language = "text/Javascript"> 
       cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
@@ -328,5 +370,7 @@ https://templatemo.com/tm-551-stand-blog
       }
     </script>
 
+
   </body>
+
 </html>
