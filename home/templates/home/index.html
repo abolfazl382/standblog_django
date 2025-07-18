@@ -19,7 +19,7 @@
                 <div class="meta-category">
                   <span>{{ article.categories.first.title  }}</span>
                 </div>
-                <a href="#"><h4>{{ article.title }}</h4></a>
+                <a href="{{ article.get_absolute_url }}"><h4>{{ article.title }}</h4></a>
                 <ul class="post-info">
                   <li><a href="#">{{ article.author.username }}</a></li>
                   <li><a href="#">{{ article.created }}</a></li>
@@ -75,7 +75,8 @@
                     </div>
                     <div class="down-content">
                       <span>Lifestyle</span>
-                      <a href="{% url 'blog:article' article.id %}"><h4>{{ article.title }}</h4></a>
+{#                      <a href="{% url 'blog:article' article.id %}"><h4>{{ article.title }}</h4></a>#}
+                      <a href="{{ article.get_absolute_url }}"><h4>{{ article.title }}</h4></a>
                       <ul class="post-info">
                         <li><a href="#">{{ article.author.username }}</a></li>
                         <li><a href="#">{{ article.created }}</a></li>
