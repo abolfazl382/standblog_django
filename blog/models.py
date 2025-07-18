@@ -30,6 +30,11 @@ class Article(models.Model):
     objects = ArticleManager()
     slug = models.SlugField(unique=True, blank=True)
 
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'post'
+        verbose_name_plural = 'posts'
+
     def get_absolute_url(self):
         return reverse('blog:article', args=[self.slug])
     
