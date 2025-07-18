@@ -8,8 +8,10 @@ def index(request):
     recent_articles = articles[:3]
 
     context = {
+        'page': 'home',
         'articles': articles,
         'recent_articles': recent_articles,
     }
 
     return render(request, 'home/index.html', context=context)
+
