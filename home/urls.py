@@ -4,4 +4,5 @@ from . import views
 app_name = 'home'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('sidebar', views.sidebar(), name='sidebar_partial'),
 ]

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load render_partial %}
 {% load static %}
 
 {% block title %}Home Page{% endblock %}
@@ -117,7 +118,8 @@
                         </div>
                     </div>
                 </div>
-                {% include 'includes/sidebar.html' %}
+{#                {% include 'includes/sidebar.html' %}#}
+                {% render_partial 'home:sidebar_partial' %}
             </div>
         </div>
     </section>

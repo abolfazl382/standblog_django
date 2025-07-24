@@ -46,6 +46,9 @@ INSTALLED_APPS = [
 
     # django-cleanup package
     'django_cleanup.apps.CleanupConfig',
+
+    # django-render-partial package
+    'django_render_partial'
 ]
 
 MIDDLEWARE = [

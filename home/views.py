@@ -15,3 +15,6 @@ def index(request):
 
     return render(request, 'home/index.html', context=context)
 
+def sidebar(request):
+    context = {}
+    return render(request, 'includes/sidebar.html', context=context)
