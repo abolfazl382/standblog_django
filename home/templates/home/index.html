@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load render_partial %}
+{% load social_share %}
 {% load static %}
 
 {% block title %}Home Page{% endblock %}
@@ -98,7 +99,7 @@
                                                         <ul class="post-share">
                                                             <li><i class="fa fa-share-alt"></i></li>
                                                             <li><a href="#">Facebook</a>,</li>
-                                                            <li><a href="#"> Twitter</a></li>
+                                                            <li>{% post_to_telegram article.get_absolute_url "Telegram" %}</li>
                                                         </ul>
                                                     </div>
                                                 </div>

@@ -19,8 +19,8 @@ class ArticleManager(models.Manager):
         return self.filter(published=True)
 
 class Article(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    categories = models.ManyToManyField(Category)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
+    categories = models.ManyToManyField(Category, related_name='articles')
     title = models.CharField(max_length=100)
     body = models.TextField()
     image = models.ImageField(upload_to='images/articles')

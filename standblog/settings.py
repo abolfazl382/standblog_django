@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qdp^zbzj70yioi=^gc&mtmt+im$3%d6pol9r0!8ww7-#26o%^e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -48,7 +48,10 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 
     # django-render-partial package
-    'django_render_partial'
+    'django_render_partial',
+
+    # django-social-share package
+    'django_social_share'
 ]
 
 MIDDLEWARE = [
