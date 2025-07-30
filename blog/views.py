@@ -1,11 +1,20 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 
-from blog.models import Article, Category
+from blog.models import Article, Category, Comment
 
 
-def articles(request, slug):
+def article_details(request, slug):
+
     article = Article.objects.get(slug=slug)
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        body = request.POST.get('body')
+        parent_id = request.POST.get('parent_id')
+        user = request.user
+        if body:
+            Comment.objects.create(article=article, user=user, body=body, parent_id=parent_id)
+
     return render(request, 'blog/post-details.html', {'article': article})
 
 def article_list(request):
@@ -25,5 +34,6 @@ def category_detail(request, id):
     # arts = category.article_set.published().order_by('-created')
     arts = category.articles.published().order_by('-created')
     return render(request, 'blog/post-list.html', context={'articles': arts})
+
 
 

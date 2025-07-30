@@ -84,6 +84,15 @@ ul, li {
 
 
 /*---------------------------------------------*/
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important; /* or flex, or inline-block, etc. */
+}
+
 input {
 	outline: none;
 	border: none;
@@ -238,6 +247,8 @@ iframe {
 
   display: block;
 }
+
+
 
 
 /*------------------------------------------------------------------
