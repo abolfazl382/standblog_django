@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from blog.models import Article, Category, Comment
 
@@ -24,9 +24,6 @@ def article_list(request):
     paginator = Paginator(arts, 1)
     objects_list = paginator.get_page(page)
 
-    for art in objects_list:
-        art.body = art.body[:50]
-
     return render(request, 'blog/post-list.html', context={'articles': objects_list})
 
 def category_detail(request, id):
@@ -34,6 +31,18 @@ def category_detail(request, id):
     # arts = category.article_set.published().order_by('-created')
     arts = category.articles.published().order_by('-created')
     return render(request, 'blog/post-list.html', context={'articles': arts})
+
+def search(request):
+    q = request.GET.get('q')
+    articles = Article.objects.filter(title__icontains=q)
+    page = request.GET.get('page')
+    paginator = Paginator(articles, 1)
+    objects_list = paginator.get_page(page)
+    return render(request, 'blog/post-list.html', context={'articles': objects_list})
+
+
+
+
 
 
 
