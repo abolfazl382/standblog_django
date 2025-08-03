@@ -54,3 +54,8 @@ class MessageForm(forms.ModelForm):
         model = Message
         fields = ['subject', 'body', 'email'] # '__all__'
         # exclude = ('email',)
+        widgets = {
+            'subject' : forms.TextInput(attrs={'placeholder': 'Your Subject'}),
+            'email' : forms.TextInput(attrs={'placeholder': 'Your Email'}),
+            'body' : forms.Textarea(attrs={'placeholder': 'Your Message'}),
+        }

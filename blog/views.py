@@ -1,7 +1,8 @@
+from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Article, Category, Comment, Message
-from .forms import ContactUsForm
+from .forms import ContactUsForm, MessageForm
 
 def article_details(request, slug):
 
@@ -41,20 +42,35 @@ def search(request):
 
 def contact_us(request):
     if request.method == 'POST':
-        form = ContactUsForm(request.POST)
+        # form = ContactUsForm(request.POST)
+        form = MessageForm(data=request.POST)
+
+        if not request.user.is_authenticated:
+            form.add_error(None, ValidationError('You must login to send message'))
+            return render(request, 'blog/contact-us.html', context={'form': form})
+
         if form.is_valid():
 
-            email = form.cleaned_data.get('email')
-            subject = form.cleaned_data.get('subject')
-            message = form.cleaned_data.get('message')
+            # email = form.cleaned_data.get('email')
+            # subject = form.cleaned_data.get('subject')
+            # message = form.cleaned_data.get('message')
+            # instance = form.save(commit=False)
+            # instance.name += ' '
+            # instance.save()
+            form = form.save(commit=False) # makes an instance but doesn't save it!
             user = request.user
-            Message.objects.create(user=user, subject=subject, email=email, body=message)
-            form = ContactUsForm()
+            form.user = user
+            form.save()
+            # Message.objects.create(user=user, subject=subject, email=email, body=message)
+            # form = ContactUsForm()
+            form = MessageForm()
         else:
             # form.add_error(None, 'Uknown error') # clean method is called
             pass
     else:
-        form = ContactUsForm()
+        # form = ContactUsForm()
+        form = MessageForm()
+
     return render(request, 'blog/contact-us.html', context={'form': form})
 
 

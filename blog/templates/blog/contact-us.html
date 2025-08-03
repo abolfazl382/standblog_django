@@ -47,11 +47,11 @@
 
                                                 <div class="col-lg-12">
                                                     <fieldset>
-                                                        {% if form.message.errors %}
+                                                        {% if form.body.errors %}
                                                             <div class="text-danger mb-2 ml-1 p-1"
-                                                                 style="font-size: 14px">{{ form.message.errors }}</div>
+                                                                 style="font-size: 14px">{{ form.body.errors }}</div>
                                                         {% endif %}
-                                                        {{ form.message }}
+                                                        {{ form.body }}
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-12">
